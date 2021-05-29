@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block time %}
+<div class="text-center">
+    {% if status == "user_notfound" %}
+    <div class="alert alert-danger" role="alert">
+        <p>ユーザ名が違います<a href="/signup">新規登録</a>はこちらから</p>
+    </div>
+    {% elif status == "wrong_password" %}
+    <div class="alert alert-danger" role="alert">
+        <p>パスワードが違います</p>
+    </div>
+
+    {% elif status == "logout" %}
+    <div class="alert alert-primary" role="alert">
+        <p>ログアウトしました</p>
+    </div>
+    {% endif %}
+
+    <h1 class="h3 mt-2 mb-3 font-weight-normal">ログイン</h1>
+    <form class="w-25 mx-auto" action="/login" method="post">
+        <label for="username" class="sr-only"></label>
+        <input class="form-control" id="username" type="text" name="user_name" placeholder="USERNAME" requiredautofocus />
+        <label for="password" class="sr-only"></label>
+        <input class="form-control" id="password" type="password" name="password" placeholder="PASSWORD" required />
+        <input class="btn btn-outline-primary my-1" type="submit" value="Login" />
+    </form>
+    <a href="/signup">新規登録</a>
+</div>
+{% endblock %}
