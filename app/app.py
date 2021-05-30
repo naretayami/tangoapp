@@ -105,7 +105,33 @@ def add():
             elif part_to_speech == 'ADV':
                 partofspeech = '副詞'
             elif part_to_speech == 'AUX':
-                partofspeech = '助動詞'       
+                partofspeech = '助動詞'
+            elif part_to_speech == 'CONJ':
+                partofspeech = '接続詞'
+            elif part_to_speech == 'CCONJ':
+                partofspeech = '等位接続詞'
+            elif part_to_speech == 'DET':
+                partofspeech = '限定詞'
+            elif part_to_speech == 'INTJ':
+                partofspeech = '間投詞、感嘆詞'
+            elif part_to_speech == 'NUM':
+                partofspeech = '数詞'
+            elif part_to_speech == 'PART':
+                partofspeech = '助詞'
+            elif part_to_speech == 'PRON':
+                partofspeech = '代名詞'
+            elif part_to_speech == 'PROPN':
+                partofspeech = '固有名詞'
+            elif part_to_speech == 'PUNCT':
+                partofspeech = '句読点'
+            elif part_to_speech == 'SCONJ':
+                partofspeech = '従属接続詞'
+            elif part_to_speech == 'SYM':
+                partofspeech = 'シンボル'
+             elif part_to_speech == 'X':
+                partofspeech = '他' 
+             elif part_to_speech == 'SPACE':
+                partofspeech = '空白'        
             else:
                 partofspeech = part_to_speech 
         memo = request.form["memo"]
