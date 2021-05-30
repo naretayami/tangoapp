@@ -5,6 +5,8 @@ from datetime import datetime
 from app import key
 from hashlib import sha256
 
+import spacy
+nlp = spacy.load("en_core_web_sm")
 
 app = Flask(__name__)
 app.secret_key = key.SECRET_KEY
@@ -89,7 +91,9 @@ def add():
         userid = session["user_name"] 
         front = request.form["front"]
         back = request.form["back"]
-        partofspeech = request.form["partofspeech"]
+        doc = nlp(request.form["front"])
+        for token in doc:
+            partofspeech = token.pos_ 
         memo = request.form["memo"]
         count = 0
         content = List(userid,front,back,partofspeech,memo,count,datetime.today())
