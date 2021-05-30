@@ -10,15 +10,17 @@ class List(Base):
     back = Column(String(128))
     partofspeech = Column(Text)
     memo = Column(Text)
+    sumcount = Column(Integer)
     count = Column(Integer)
     date = Column(DateTime, default=datetime.today())
 
-    def __init__(self, userid=None, front=None, back=None, partofspeech=None, memo=None, count=None, date=None):
+    def __init__(self, userid=None, front=None, back=None, partofspeech=None, memo=None, sumcount=None, count=None, date=None):
         self.userid = userid
         self.front = front
         self.back = back
         self.partofspeech = partofspeech
         self.memo = memo
+        self.sumcount = sumcount
         self.count = count
         self.date = date
         

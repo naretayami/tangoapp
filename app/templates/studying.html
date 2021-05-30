@@ -12,25 +12,40 @@
             <th>メモ</th>
             <th></th>
             <th></th>
+            <th></th>
+            <th></th>
         </tr>
         <tr>
+            <td>{{studyone.id}}</td>　
+            <!-- idはいらない -->
             <td>{{studyone.front}}</td>
             <td>{{studyone.back}}</td>
             <td>{{studyone.partofspeech}}</td>
-            <td>{{studyone.memo}}</td>
-            <td>{{studyone.date}}</td>
+            <td>{{studyone.date.strftime('%b %d, %Y')}}</td>
+            <!-- 日付はいらない -->
+            <td>{{studyone.count}}</td>
+            <!-- カウントもいらない -->
+            <td>{{studyone.sumcount}}</td>
             <td>
-                <form action="/delete/{{studyone.id}}" method="post" id="delete">
-                    <input type="submit" name="delete" value="削除する">
+                <form action="/understand/{{studyone.id}}" method="post" name="understand">
+                    <input type="submit" name="understand" value="〇">
+                </form>
             </td>
             <td>
-                <a class="edit" href="/edit/{{studyone.id}}">編集する</a>
+                <form action="/repeats/{{studyone.id}}" method="post" name="repeats">
+                    <input type="submit" name="repeats" value="×">
+                </form>
+            </td>
+            <td>
+                <a class="pronounce" href="/pronounce/{{studyone.id}}">詳しく見る</a>
             </td>
         </tr>
-
     </table>
+
+
+
+    {% endfor %}
 </div>
-{% endfor %}
 <h4><a class="new" href="/index">戻る</a></h4>
 
 {% endblock %}

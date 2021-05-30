@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block time %}
+
+<h2>{{study.front}}</h2>
+<h3>{{study.back}}</h3>
+<h3>品詞：{{study.partofspeech}}</h3>
+<h3>メモ：{{study.memo}}</h3>
+<h3>{{study.sumcount}}回学習しました</h3>
+<h4>{{study.count}}</h4>
+<h3>最終学習日{{study.date.strftime('%b %d, %Y')}}</h3>
+<h3><button id="word" value="{{study.front}}" onclick="pronounce()">発音を確認</button></h3>
+
+<script type="text/javascript">
+
+    'use strict'
+
+    function pronounce() {
+
+        let word = document.getElementById('word').value;
+        let u = new SpeechSynthesisUtterance();
+        u.lang = 'en-US';
+        u.text = word;
+        speechSynthesis.speak(u);
+
+    }
+
+</script>
+
+<form action="/delete/{{study.id}}" method="post" name="delete">
+    <input type="submit" name="delete" value="削除する">
+</form>
+
+<h3><a class="edit" href="/edit/{{study.id}}">編集する</a></h3>
+<h4><a class="return" href="/studying">戻る</a></h4>
+
+{% endblock %}

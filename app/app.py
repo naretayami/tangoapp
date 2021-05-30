@@ -93,24 +93,94 @@ def add():
         back = request.form["back"]
         doc = nlp(request.form["front"])
         for token in doc:
-            partofspeech = token.pos_ 
+            part_to_speech = token.pos_
+            if part_to_speech == 'VERB':
+                partofspeech = '動詞'
+            elif part_to_speech == 'NOUN':
+                part_to_speech = '名詞'
+            elif part_to_speech == 'ADJ':
+                partofspeech = '形容詞'
+            elif part_to_speech == 'ADP':
+                partofspeech = '前置詞'
+            elif part_to_speech == 'ADV':
+                partofspeech = '副詞'
+            elif part_to_speech == 'AUX':
+                partofspeech = '助動詞'       
+            else:
+                partofspeech = part_to_speech 
         memo = request.form["memo"]
+        sumcount = 0
         count = 0
-        content = List(userid,front,back,partofspeech,memo,count,datetime.today())
+        content = List(userid,front,back,partofspeech,memo,sumcount,count,datetime.today())
         db_session.add(content)
         db_session.commit()
         return redirect(url_for("index"))
-
 
 
 @app.route("/studying")
 def studying():
     if "user_name" in session:
         name = session["user_name"]
-        studyALL = List.query.filter_by(userid=name)
+        studyALL = List.query.filter_by(userid=name).order_by(List.date.desc())
         return render_template("studying.html",studyALL=studyALL)
     else:
-        return redirect(url_for("/",status="logout"))
+        return redirect(url_for("top",status="logout"))
+
+
+@app.route("/edit/<int:id>/")
+def edit(id):
+    if "user_name" in session:
+        study = List.query.get(id)
+        return render_template("edit.html",id=id,study=study)
+    else:
+        return redirect(url_for("top",status="logout"))
+
+
+@app.route("/update/<int:id>",methods=["post"])
+def update(id):
+    content = List.query.filter_by(id=id).first()
+    content.back = request.form["back"]
+    content.memo = request.form["memo"]
+    db_session.commit()
+    return redirect(url_for("studying"))
+
+
+@app.route("/pronounce/<int:id>/")
+def pronounce(id):
+    if "user_name" in session:
+        study = List.query.get(id)
+        return render_template("pronounce.html",id=id,study=study)
+    else:
+        return redirect(url_for("top",status="logout"))
+
+
+@app.route("/understand/<int:id>",methods=["post"])
+def understand(id):
+    content = List.query.filter_by(id=id).first()
+    content.sumcount += 1
+    content.count += 1
+    content.date = datetime.today()
+    db_session.commit()
+    return redirect(url_for("studying"))
+
+
+@app.route("/repeats/<int:id>",methods=["post"])
+def repeats(id):
+    content = List.query.filter_by(id=id).first()
+    content.sumcount += 1
+    content.count = 0
+    content.date = datetime.today()
+    db_session.commit()
+    return redirect(url_for("studying"))
+
+
+@app.route("/delete/<int:id>",methods=["post"])
+def delete(id):
+    id_list = request.form.getlist("delete")
+    content = List.query.filter_by(id=id).first()
+    db_session.delete(content)
+    db_session.commit()
+    return redirect(url_for("studying"))
 
 
 if __name__ == "__main__":
