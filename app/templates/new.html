@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block time %}
+
+<h1 class="h3 mt-2 mb-3 font-weight-normal">新規追加</h1>
+
+<form class="w-25 mx-auto" action="/add" method="post">
+    <label class="sr-only"></label>
+    <input class="form-control" type="text" name="front" placeholder="覚えたいもの" required autofocus />
+    
+    <label class="sr-only"></label>
+    <input class="form-control" type="text" name="back" placeholder="答え" required autofocus />
+    
+    <label class="sr-only"></label>
+    <input class="form-control" type="text" name="partofspeech" placeholder="品詞" />
+    
+    <label class="sr-only"></label>
+    <input class="form-control" type="text" name="memo" placeholder="メモ" />
+    
+    <input class="btn btn-outline-primary my-1" type="submit" value="新規追加" />
+</form>
+
+<h4><a class="return" href="index">戻る</a></h4>
+
+{% endblock %}

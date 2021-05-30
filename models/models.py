@@ -5,7 +5,7 @@ from datetime import datetime
 class List(Base):
     __tablename__ = 'lists'
     id = Column(Integer, primary_key=True)
-    userid = Column(Integer)
+    userid = Column(String(128))
     front = Column(String(128))
     back = Column(String(128))
     partofspeech = Column(Text)

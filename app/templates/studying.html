@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block time %}
+
+<div class="table-responsive">
+    {% for studyone in studyALL %}
+    <table class="table table-striped">
+        <tr>
+            <th>英単語</th>
+            <th>日本語訳
+            <th>
+            <th>品詞</th>
+            <th>メモ</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>{{studyone.front}}</td>
+            <td>{{studyone.back}}</td>
+            <td>{{studyone.partofspeech}}</td>
+            <td>{{studyone.memo}}</td>
+            <td>
+                <form action="/delete/{{studyone.id}}" method="post" id="delete">
+                    <input type="submit" name="delete" value="削除する">
+            </td>
+            <td>
+                <a class="edit" href="/edit/{{studyone.id}}">編集する</a>
+            </td>
+        </tr>
+
+    </table>
+</div>
+{% endfor %}
+<h4><a class="new" href="/index">戻る</a></h4>
+
+{% endblock %}

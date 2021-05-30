@@ -15,15 +15,6 @@ def top():
     return render_template("top.html") 
 
 
-@app.route("/index")
-def index():
-    if "user_name" in session:
-        name = session["user_name"]
-        return render_template("index.html",name=name)
-    else:
-        return redirect(url_for("login",status="logout"))
-
-
 @app.route("/login")
 def login():
     status = request.args.get("status")
@@ -72,6 +63,50 @@ def registar():
 def logout():
     session.pop("user_name", None)
     return redirect(url_for("login",status="logout"))
+
+
+@app.route("/index")
+def index():
+    if "user_name" in session:
+        name = session["user_name"]
+        return render_template("index.html",name=name)
+    else:
+        return redirect(url_for("login",status="logout"))
+
+
+@app.route('/new')
+def new():
+    if "user_name" in session:
+        name = session["user_name"]
+        return render_template("new.html",name=name)
+    else:
+        return redirect(url_for("top",status="logout"))
+
+
+@app.route("/add",methods=["post"])
+def add():
+    if "user_name" in session:
+        userid = session["user_name"] 
+        front = request.form["front"]
+        back = request.form["back"]
+        partofspeech = request.form["partofspeech"]
+        memo = request.form["memo"]
+        count = 0
+        content = List(userid,front,back,partofspeech,memo,count,datetime.today())
+        db_session.add(content)
+        db_session.commit()
+        return redirect(url_for("index"))
+
+
+
+@app.route("/studying")
+def studying():
+    if "user_name" in session:
+        name = session["user_name"]
+        studyALL = List.query.filter_by(userid=name)
+        return render_template("studying.html",studyALL=studyALL)
+    else:
+        return redirect(url_for("/",status="logout"))
 
 
 if __name__ == "__main__":
