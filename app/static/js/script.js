@@ -13,12 +13,12 @@ function clickBtn(i) {
 }
 
 
-// function pronounce() {
+function pronounce() {
 
-//     let word = document.getElementById('word').value;
-//     let u = new SpeechSynthesisUtterance();
-//     u.lang = 'en-US';
-//     u.text = word;
-//     speechSynthesis.speak(u);
+    let word = document.getElementById('word').value;
+    let u = new SpeechSynthesisUtterance();
+    u.lang = 'en-US';
+    u.text = word;
+    speechSynthesis.speak(u);
 
-// }
+}

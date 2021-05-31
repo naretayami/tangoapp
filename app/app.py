@@ -2,6 +2,7 @@ from flask import Flask,render_template,request,session,redirect,url_for
 from models.models import List, User
 from models.database import db_session
 from datetime import datetime
+from datetime import timedelta
 from app import key
 from hashlib import sha256
 
@@ -147,8 +148,9 @@ def add():
 def studying():
     if "user_name" in session:
         name = session["user_name"]
-        studyALL = List.query.filter_by(userid=name).order_by(List.date.desc())
-        return render_template("studying.html",studyALL=studyALL)
+        studyALL = List.query.filter_by(userid=name).order_by(List.date.asc())
+        nowdate = datetime.today()
+        return render_template("studying.html",studyALL=studyALL,nowdate=nowdate)
     else:
         return redirect(url_for("top",status="logout"))
 
@@ -185,7 +187,20 @@ def understand(id):
     content = List.query.filter_by(id=id).first()
     content.sumcount += 1
     content.count += 1
-    content.date = datetime.today()
+    if content.count == 1:
+        content.date = datetime.today()+ timedelta(minutes=1)
+    elif content.count == 2:
+        content.date = datetime.today()+ timedelta(minutes=3)
+    elif content.count == 3:
+        content.date = datetime.today()+ timedelta(minutes=5)
+    elif content.count == 4:
+        content.date = datetime.today()+ timedelta(minutes=7)
+    elif content.count == 5:
+        content.date = datetime.today()+ timedelta(minutes=14)
+    elif content.count == 6:
+        content.date = datetime.today()+ timedelta(minutes=30)
+    else:
+        content.date = datetime.today() # ここの処理未定
     db_session.commit()
     return redirect(url_for("studying"))
 
@@ -195,7 +210,7 @@ def repeats(id):
     content = List.query.filter_by(id=id).first()
     content.sumcount += 1
     content.count = 0
-    content.date = datetime.today()
+    content.date = datetime.today() + timedelta(minutes=-1)
     db_session.commit()
     return redirect(url_for("studying"))
 

@@ -6,9 +6,9 @@
     <table class="table table-striped">
         <tr>
             <td>{{studyone.id}}</td>　
-            <!-- idはいらない -->    
+            <!-- idはいらない -->
             <td>{{studyone.front}}</td>
-           
+
             <td id="{{studyone.id}}">{{studyone.back}}</td>
             <td>
                 <input type="button" value="答えを見る" onclick="clickBtn('{{studyone.id}}')" />
@@ -19,6 +19,7 @@
             </script>
 
             <td>品詞：{{studyone.partofspeech}}</td>
+            <td>最終復習日：{{studyone.date}}</td>
 
             <td>最終復習日：{{studyone.date.strftime('%b %d, %Y')}}</td>
 
@@ -40,8 +41,6 @@
             </td>
         </tr>
     </table>
-
-
 
     {% endfor %}
 </div>
