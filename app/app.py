@@ -128,9 +128,9 @@ def add():
                 partofspeech = '従属接続詞'
             elif part_to_speech == 'SYM':
                 partofspeech = 'シンボル'
-             elif part_to_speech == 'X':
+            elif part_to_speech == 'X':
                 partofspeech = '他' 
-             elif part_to_speech == 'SPACE':
+            elif part_to_speech == 'SPACE':
                 partofspeech = '空白'        
             else:
                 partofspeech = part_to_speech 
