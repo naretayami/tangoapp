@@ -3,7 +3,7 @@
 
 <div class="table-responsive">
     {% for studyone in studyALL %}
-    {% if nowdate > studyone.date %}
+    {% if studyone.date　>= 7 %}
     <table class="table table-striped">
         <tr>
             <td>{{studyone.front}}</td>
@@ -18,18 +18,11 @@
             </script>
 
             <td>品詞：{{studyone.partofspeech}}</td>
-            <td>次回復習日：{{studyone.date}}</td>
-<!--いらない -->
-            <td>{{studyone.count}}</td>
-            <!-- カウントもいらない -->
+            <td>最終復習日：{{studyone.date}}</td>
+
             <td>
-                <form action="/understand/{{studyone.id}}" method="post" name="understand">
-                    <input type="submit" name="understand" value="〇">
-                </form>
-            </td>
-            <td>
-                <form action="/repeats/{{studyone.id}}" method="post" name="repeats">
-                    <input type="submit" name="repeats" value="×">
+                <form action="/repeats_complete/{{studyone.id}}" method="post" name="repeats_complete">
+                    <input type="submit" name="repeats_complete" value="×">
                 </form>
             </td>
             <td>

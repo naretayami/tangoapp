@@ -155,6 +155,26 @@ def studying():
         return redirect(url_for("top",status="logout"))
 
 
+@app.route("/allstudying")
+def allstudying():
+    if "user_name" in session:
+        name = session["user_name"]
+        studyALL = List.query.filter_by(userid=name).order_by(List.date.asc())
+        return render_template("allstudying.html",studyALL=studyALL)
+    else:
+        return redirect(url_for("top",status="logout"))
+
+
+@app.route("/complete")
+def complete():
+    if "user_name" in session:
+        name = session["user_name"]
+        studyALL = List.query.filter_by(userid=name).order_by(List.date.asc())
+        return render_template("complete.html",studyALL=studyALL)
+    else:
+        return redirect(url_for("top",status="logout"))
+
+
 @app.route("/edit/<int:id>/")
 def edit(id):
     if "user_name" in session:
@@ -200,7 +220,7 @@ def understand(id):
     elif content.count == 6:
         content.date = datetime.today()+ timedelta(minutes=30)
     else:
-        content.date = datetime.today() # ここの処理未定
+        content.date = datetime.today()
     db_session.commit()
     return redirect(url_for("studying"))
 
@@ -215,13 +235,33 @@ def repeats(id):
     return redirect(url_for("studying"))
 
 
+@app.route("/repeats_complete/<int:id>",methods=["post"])
+def repeats_complete(id):
+    content = List.query.filter_by(id=id).first()
+    content.sumcount += 1
+    content.count = 0
+    content.date = datetime.today() + timedelta(minutes=-1)
+    db_session.commit()
+    return redirect(url_for("complete"))
+
+
+@app.route("/repeats_allstudying/<int:id>",methods=["post"])
+def repeats_allstudying(id):
+    content = List.query.filter_by(id=id).first()
+    content.sumcount += 1
+    content.count = 0
+    content.date = datetime.today() + timedelta(minutes=-1)
+    db_session.commit()
+    return redirect(url_for("allstudying"))
+
+
 @app.route("/delete/<int:id>",methods=["post"])
 def delete(id):
     id_list = request.form.getlist("delete")
     content = List.query.filter_by(id=id).first()
     db_session.delete(content)
     db_session.commit()
-    return redirect(url_for("studying"))
+    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":

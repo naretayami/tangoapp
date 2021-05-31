@@ -6,8 +6,7 @@
 <h3>品詞：{{study.partofspeech}}</h3>
 <h3>メモ：{{study.memo}}</h3>
 <h3>{{study.sumcount}}回学習しました</h3>
-<h4>{{study.count}}</h4>
-<h3>最終学習日{{study.date.strftime('%b %d, %Y')}}</h3>
+<h3>次回学習日：{{study.date.strftime('%b %d, %Y')}}</h3>
 <h3><button id="word" value="{{study.front}}" onclick="pronounce()">発音を確認</button></h3>
 
 <script type="text/javascript">
@@ -31,6 +30,6 @@
 </form>
 
 <h3><a class="edit" href="/edit/{{study.id}}">編集する</a></h3>
-<h4><a class="return" href="/studying">戻る</a></h4>
+<h4><a class="return" href="javascript:history.back()">戻る</a></h4>
 
 {% endblock %}
