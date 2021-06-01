@@ -1,0 +1,46 @@
+body {
+    background-color: rgb(253, 253, 253);
+}
+
+h1 {
+    text-align: center;
+    color: rgb(150, 50, 243);
+}
+
+.login_button {
+    display: inline-block;
+    text-align: center;
+    padding: 0.3em 1em; 
+    color: #4185af;
+    border: solid 2px #5098c5;
+    border-radius: 3px;
+    transition: .4s;    
+}
+
+.login_button:hover {
+    background: #67c5ff;
+    color: white;
+}
+
+.login_button a {
+    text-decoration: none;
+}
+
+.signup_button {
+    text-align: center;
+    display: inline-block;
+    padding: 0.3em 1em;
+    color: #4185af;
+    border: solid 2px #5098c5;
+    border-radius: 3px;
+    transition: .4s;
+}
+
+.signup_button:hover {
+    background: #67c5ff;
+    color: white;
+}
+
+.signup_button a {
+    text-decoration: none;
+}
