@@ -9,15 +9,15 @@
 
 <form class="w-25 mx-auto" action="/aimaisearch" method="post">
     <label class="sr-only"></label>
-    <input class="form-control" type="text" name="search_word" placeholder="あいまい検索"/>
-    
+    <input class="form-control" type="text" name="search_word" placeholder="あいまい検索" />
+
     <input class="btn btn-outline-primary my-1" type="submit" value="検索" />
 </form>
 
 <form class="w-25 mx-auto" action="/zensearch" method="post">
     <label class="sr-only"></label>
-    <input class="form-control" type="text" name="search_word" placeholder="全一致検索"/>
-    
+    <input class="form-control" type="text" name="search_word" placeholder="全一致検索" />
+
     <input class="btn btn-outline-primary my-1" type="submit" value="検索" />
 </form>
 
@@ -26,6 +26,7 @@
 {{searchone.front}} ：{{searchone.back}}
 品詞：{{searchone.partofspeech}}
 <a class="pronounce" href="/pronounce/{{searchone.id}}">詳しく見る</a>
+
 <form action="/repeats/{{searchone.id}}" method="post" name="repeats">
     <input type="submit" name="repeats" value="×">
 </form>
@@ -38,6 +39,7 @@
 <h2><a href="/studying">勉強開始</a></h2>
 <h2><a href="/complete">学習済み</a></h2>
 <h2><a href="/allstudying">学習管理</a></h2>
-<h2><a href="/verb">品詞別：動詞</a></h2>　
-<!-- 将来的には、プルダウンで選択、表示ができるようにする verb未実装-->
+
+
+
 {% endblock %}
