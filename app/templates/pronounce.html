@@ -24,7 +24,9 @@
     }
 
 </script>
-
+<form action="/repeats/{{study.id}}" method="post" name="repeats">
+    <input type="submit" name="repeats" value="やり直す">
+</form>
 <form action="/delete/{{study.id}}" method="post" name="delete">
     <input type="submit" name="delete" value="削除する">
 </form>

@@ -5,12 +5,14 @@ from datetime import datetime
 from datetime import timedelta
 from app import key
 from hashlib import sha256
-
 import spacy
-nlp = spacy.load("en_core_web_sm")
+
 
 app = Flask(__name__)
 app.secret_key = key.SECRET_KEY
+
+
+nlp = spacy.load("en_core_web_sm")
 
 
 @app.route("/")
@@ -95,6 +97,7 @@ def add():
         doc = nlp(request.form["front"])
         for token in doc:
             part_to_speech = token.pos_
+    
             if part_to_speech == 'VERB':
                 partofspeech = '動詞'
             elif part_to_speech == 'NOUN':
@@ -208,17 +211,17 @@ def understand(id):
     content.sumcount += 1
     content.count += 1
     if content.count == 1:
-        content.date = datetime.today()+ timedelta(minutes=1)
+        content.date = datetime.today() + timedelta(minutes=1)
     elif content.count == 2:
-        content.date = datetime.today()+ timedelta(minutes=3)
+        content.date = datetime.today() + timedelta(minutes=3)
     elif content.count == 3:
-        content.date = datetime.today()+ timedelta(minutes=5)
+        content.date = datetime.today() + timedelta(minutes=5)
     elif content.count == 4:
-        content.date = datetime.today()+ timedelta(minutes=7)
+        content.date = datetime.today() + timedelta(minutes=7)
     elif content.count == 5:
-        content.date = datetime.today()+ timedelta(minutes=14)
+        content.date = datetime.today() + timedelta(minutes=14)
     elif content.count == 6:
-        content.date = datetime.today()+ timedelta(minutes=30)
+        content.date = datetime.today() + timedelta(minutes=30)
     else:
         content.date = datetime.today()
     db_session.commit()
@@ -262,6 +265,28 @@ def delete(id):
     db_session.delete(content)
     db_session.commit()
     return redirect(url_for("index"))
+
+
+@app.route("/aimaisearch",methods=["post"])
+def aimaisearch():
+    search_word = request.form["search_word"]
+    searchALL = List.query.filter(List.front.like('%\\' + search_word + '%', escape='\\')).all()
+    if searchALL == "":
+        searchresult = "お探しの英単語は登録されていません"
+        return render_template("index.html",searchresult=searchresult)
+    else:
+        return render_template("index.html",searchALL=searchALL)
+
+
+@app.route("/zensearch",methods=["post"])
+def zensearch():
+    search_word = request.form["search_word"]
+    searchALL = List.query.filter_by(front=search_word).all()
+    if searchALL == "":
+        searchresult = "お探しの英単語は登録されていません"
+        return render_template("index.html",searchresult=searchresult)
+    else:
+        return render_template("index.html",searchALL=searchALL)
 
 
 if __name__ == "__main__":
