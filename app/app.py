@@ -153,7 +153,10 @@ def studying():
         name = session["user_name"]
         studyALL = List.query.filter_by(userid=name).order_by(List.date.asc())
         nowdate = datetime.today()
-        return render_template("studying.html",studyALL=studyALL,nowdate=nowdate)
+        meg = "もうちょっとこうだったら使いやすいのに、を集めた英単語アプリです。"
+        meg2 = "主な機能を紹介します。"
+        meg3 = "１・反復学習"
+        return render_template("studying.html",studyALL=studyALL,nowdate=nowdate,meg=meg,meg2=meg2,meg3=meg3)
     else:
         return redirect(url_for("top",status="logout"))
 
