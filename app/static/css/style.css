@@ -1,11 +1,14 @@
+
 body {
     background-color: rgb(253, 253, 253);
 }
 
-h1 {
-    text-align: center;
-    color: rgb(150, 50, 243);
-}
+
+
+img {
+    max-width: 960px;
+  }
+
 
 .login_button {
     display: inline-block;
@@ -43,4 +46,55 @@ h1 {
 
 .signup_button a {
     text-decoration: none;
+}
+
+input.form-control {
+    width: 120%;
+    position: relative;
+    right: 10%;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.topmoji {
+    text-align: center;
+    font-size: 50px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.bottommoji {
+    font-size: 25px;
+}
+
+
+/* PC用のCSSはメディアクエリの外に記述する */
+
+@media screen and (max-width: 959px) {
+	/* 959px以下に適用されるCSS（タブレット用） */
+    input.form-control {
+        width: 180%;
+        position: relative;
+        right: 40%;
+    }
+}
+@media screen and (max-width: 480px) {
+	/* 480px以下に適用されるCSS（スマホ用） */
+    img {
+        width: 100%;
+    }
+    
+    input.form-control {
+        width: 200%;
+        position: relative;
+        right: 50%;
+    }
+
+    .topmoji {
+        text-align: center;
+        font-size: 30px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 }
