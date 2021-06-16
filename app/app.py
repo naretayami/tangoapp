@@ -269,24 +269,30 @@ def delete(id):
 
 @app.route("/aimaisearch",methods=["post"])
 def aimaisearch():
-    search_word = request.form["search_word"]
-    searchALL = List.query.filter(List.front.like('%\\' + search_word + '%', escape='\\')).all()
-    if searchALL == "":
-        searchresult = "お探しの英単語は登録されていません"
-        return render_template("index.html",searchresult=searchresult)
+    if "user_name" in session:
+        name = session["user_name"]
+        search_word = request.form["search_word"]
+        searchALL = List.query.filter_by(userid=name).filter(List.front.like('%\\' + search_word + '%', escape='\\')).all()
+        if searchALL == "":
+            searchresult = "お探しの英単語は登録されていません"
+            return render_template("index.html",name=name,searchresult=searchresult)
+        return render_template("index.html",name=name,searchALL=searchALL)
     else:
-        return render_template("index.html",searchALL=searchALL)
+        return redirect(url_for("top",status="logout"))
 
 
 @app.route("/zensearch",methods=["post"])
 def zensearch():
-    search_word = request.form["search_word"]
-    searchALL = List.query.filter_by(front=search_word).all()
-    if searchALL == "":
-        searchresult = "お探しの英単語は登録されていません"
-        return render_template("index.html",searchresult=searchresult)
+    if "user_name" in session:
+        name = session["user_name"]
+        search_word = request.form["search_word"]
+        searchALL = List.query.filter_by(userid=name,front=search_word).all()
+        if searchALL == None:
+            searchresult = 'お探しの英単語は登録されていません'
+            return render_template("index.html",name=name,searchresult=searchresult)
+        return render_template("index.html",name=name,searchALL=searchALL)
     else:
-        return render_template("index.html",searchALL=searchALL)
+        return redirect(url_for("top",status="logout"))
 
 
 if __name__ == "__main__":
