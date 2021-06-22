@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% block time %}
 
-<div class="text-center">
     {% if status == "exist_user" %}
     <div class="alert alert-danger" role="alert">
         <p>そのユーザ名は既に登録されています</p>
@@ -11,11 +10,11 @@
     <h1 class="topmoji">新規登録</h1>
     <form class="w-25 mx-auto" action="/registar" method="post">
         <label for="username" class="sr-only"></label>
-        <input class="form-control" id="username" type="text" name="user_name" placeholder="USERNAME" required autofocus />
+        <input class="form-control" id="username" type="text" name="user_name" placeholder="USERNAME" required
+            autofocus />
         <label for="password" class="sr-only"></label>
         <input class="form-control" id="password" type="password" name="password" placeholder="PASSWORD" required />
         <input class="btn btn-outline-primary my-1" type="submit" value="新規登録" />
     </form>
     <p><a class="bottommoji" href="/login">ログイン画面</a>に戻る</p>
-</div>
 {% endblock %}

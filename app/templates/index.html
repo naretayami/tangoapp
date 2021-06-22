@@ -1,11 +1,9 @@
 {% extends "layout.html" %}
 {% block time %}
 
-<h1>HELLO</h1>
-<h3><a class="logout" href="/logout">ログアウト</a></h3>
+<h1>tangoapp</h1>
 
-<h2>{{ name }}</h2>
-<h2>検索</h2>
+<h4>検索</h4>
 
 <form class="w-25 mx-auto" action="/aimaisearch" method="post">
     <label class="sr-only"></label>
@@ -21,25 +19,25 @@
     <input class="btn btn-outline-primary my-1" type="submit" value="検索" />
 </form>
 
+<div class="searchresult">
+    {% for searchone in searchALL %}
+    {{searchone.front}} ：{{searchone.back}}
+    品詞：{{searchone.partofspeech}}
+    <a class="pronounce" href="/pronounce/{{searchone.id}}">詳しく見る</a>
 
-{% for searchone in searchALL %}
-{{searchone.front}} ：{{searchone.back}}
-品詞：{{searchone.partofspeech}}
-<a class="pronounce" href="/pronounce/{{searchone.id}}">詳しく見る</a>
+    <form action="/repeats/{{searchone.id}}" method="post" name="repeats">
+        <input type="submit" name="repeats" value="×">
+    </form>
+    {% endfor %}
 
-<form action="/repeats/{{searchone.id}}" method="post" name="repeats">
-    <input type="submit" name="repeats" value="×">
-</form>
-{% endfor %}
+    {{searchresult}}
+</div>
 
-{{searchresult}}
-
-
+<h2>{{ name }}</h2>
+<h3><a class="logout" href="/logout">ログアウト</a></h3>
 <h2><a href="/new">新規登録</a></h2>
 <h2><a href="/studying">勉強開始</a></h2>
 <h2><a href="/complete">学習済み</a></h2>
 <h2><a href="/allstudying">学習管理</a></h2>
-
-
 
 {% endblock %}

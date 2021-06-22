@@ -1,16 +1,12 @@
-
 body {
     background-color: rgb(253, 253, 253);
 }
-
-
 
 img {
     max-width: 960px;
   }
 
-
-.login_button {
+/* .login_button {
     display: inline-block;
     text-align: center;
     padding: 0.3em 1em; 
@@ -46,7 +42,7 @@ img {
 
 .signup_button a {
     text-decoration: none;
-}
+} */
 
 input.form-control {
     width: 120%;
@@ -112,4 +108,3 @@ input.form-control {
         margin-top:3px;
     }
 }
-

@@ -1,23 +1,23 @@
 {% extends "layout.html" %}
 {% block time %}
+    <h1 class="topmoji">編集</h1>
 
-<h1 class="topmoji">編集</h1>
+    <h2>{{study.front}}</h2>
 
-<h2>{{study.front}}</h2>
+    <form class="w-25 mx-auto" action="/update/{{id}}" method="post" 　name="update">
+        <label class="sr-only"></label>
+        <input class="form-control" type="text" name="back" value="{{study.back}}" placeholder="答え"
+            required　autofocus />
 
-<form class="w-25 mx-auto" action="/update/{{id}}" method="post" 　name="update">
-    <label class="sr-only"></label>
-    <input class="form-control" type="text" name="back" value="{{study.back}}" placeholder="答え" required　autofocus />
-    
-    <label class="sr-only"></label>
-    <input class="form-control" id="" type="text" name="partofspeech" value="{{study.partofspeech}}" placeholder="品詞" />
-   
-    <label class="sr-only"></label>
-    <input class="form-control" id="" type="text" name="memo" value="{{study.memo}}" placeholder="メモ" />
-    
-    <input class="btn btn-outline-primary my-1" type="submit" value="編集を記録する" />
-</form>
+        <label class="sr-only"></label>
+        <input class="form-control" id="" type="text" name="partofspeech" value="{{study.partofspeech}}"
+            placeholder="品詞" />
 
-<h4><a class="bottommoji" href="javascript:history.back()">戻る</a></h4>
+        <label class="sr-only"></label>
+        <input class="form-control" id="" type="text" name="memo" value="{{study.memo}}" placeholder="メモ" />
 
+        <input class="btn btn-outline-primary my-1" type="submit" value="編集を記録する" />
+    </form>
+
+    <a class="bottommoji" href="javascript:history.back()">戻る</a>
 {% endblock %}

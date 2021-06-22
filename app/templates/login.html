@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
 {% block time %}
-<div class="text-center">
     {% if status == "user_notfound" %}
     <div class="alert alert-danger" role="alert">
         <p>ユーザ名が違います<a href="/signup">新規登録</a>はこちらから</p>
@@ -19,11 +18,11 @@
     <h3 class="topmoji">ログイン</h3>
     <form class="w-25 mx-auto" action="/authentication" method="post">
         <label for="username" class="sr-only"></label>
-        <input class="form-control" id="username" type="text" name="user_name" placeholder="USERNAME" requiredautofocus />
+        <input class="form-control" id="username" type="text" name="user_name" placeholder="USERNAME"
+            requiredautofocus />
         <label for="password" class="sr-only"></label>
         <input class="form-control" id="password" type="password" name="password" placeholder="PASSWORD" required />
         <input class="btn btn-outline-primary my-1" type="submit" value="Login" />
     </form>
     <a class="bottommoji" href="/signup">新規登録</a>
-</div>
 {% endblock %}
