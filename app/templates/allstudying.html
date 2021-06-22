@@ -1,37 +1,32 @@
 {% extends "layout.html" %}
 {% block time %}
 
-<div class="table-responsive">
-    {% for studyone in studyALL %}
-    <table class="table table-striped">
-        <tr>
-            <td>{{studyone.front}}</td>
 
-            <td id="{{studyone.id}}">{{studyone.back}}</td>
-            <td>
-                <input type="button" value="答えを見る" onclick="clickBtn('{{studyone.id}}')" />
-            </td>
-            <script>
-                //最初は非表示にする
-                document.getElementById("{{studyone.id}}").style.visibility = "hidden";
-            </script>
-
-            <td>品詞：{{studyone.partofspeech}}</td>
-            <td>次回復習日：{{studyone.date}}</td>
-            <td>学習回数：{{studyone.sumcount}}</td>
-            <td>
-                <form action="/repeats_allstudying/{{studyone.id}}" method="post" name="repeats_allstudying">
-                    <input type="submit" name="repeats_allstudying" value="×">
-                </form>
-            </td>
-            <td>
-                <a class="pronounce" href="/pronounce/{{studyone.id}}">詳しく見る</a>
-            </td>
-        </tr>
-    </table>
-
-    {% endfor %}
+{% for studyone in studyALL %}
+<div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h3 class="card-title">{{studyone.front}}</h3>
+        <p id="{{studyone.id}}">{{studyone.back}}</p>
+        <input class="btn btn-primary" type="button" value="答えを見る" onclick="clickBtn('{{studyone.id}}')" />
+        <script>
+            //最初は非表示にする
+            document.getElementById("{{studyone.id}}").style.visibility = "hidden";
+        </script>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">品詞：{{studyone.partofspeech}}</li>
+            <li class="list-group-item"> 学習回数：{{studyone.sumcount}}</li>
+        </ul>
+        <form action="/repeats_allstudying/{{studyone.id}}" method="post" name="repeats_allstudying">
+            <input class="btn btn-primary" type="submit" name="repeats_allstudying" value="×">
+        </form>
+        <a href="/pronounce/{{studyone.id}}" class="card-link">詳しく見る</a>
+        <p class="card-text"><small class="text-muted">次回復習日：{{studyone.date}}</small></p>
+    </div>
 </div>
-<h4><a class="new" href="/index">戻る</a></h4>
+
+{% endfor %}
+
+<!-- <a class="btn btn-primary" href="/index">戻る</a> -->
 
 {% endblock %}

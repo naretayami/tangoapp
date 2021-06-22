@@ -101,7 +101,7 @@ def add():
             if part_to_speech == 'VERB':
                 partofspeech = '動詞'
             elif part_to_speech == 'NOUN':
-                part_to_speech = '名詞'
+                partofspeech = '名詞'
             elif part_to_speech == 'ADJ':
                 partofspeech = '形容詞'
             elif part_to_speech == 'ADP':

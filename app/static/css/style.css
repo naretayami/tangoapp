@@ -68,6 +68,15 @@ input.form-control {
     font-size: 25px;
 }
 
+.card {
+    width: 25rem;
+    margin: 30px;
+}
+
+.btn btn-primary {
+    position: relative;
+    left: 50%;
+}
 
 /* PC用のCSSはメディアクエリの外に記述する */
 
@@ -97,4 +106,10 @@ input.form-control {
         margin-top: 20px;
         margin-bottom: 20px;
     }
+
+    .card {
+        width: auto;
+        margin-top:3px;
+    }
 }
+
