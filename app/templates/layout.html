@@ -2,23 +2,81 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
-    <!-- 画面拡大ができる -->
-    <title>Document</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static',filename='images/icon.png') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
+  <!-- 画面拡大ができる -->
+  <title>Document</title>
+  <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static',filename='images/icon.png') }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
 </head>
 
 <body>
-    <div class="text-center">
-    {% block time %}
-    
-    {% endblock %}
+  {% if "user_name" in session %}
+  <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="index">tangoapp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02" style>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" href="/studying">勉強 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/new">新規登録</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/complete">学習済み</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/allstudying">学習管理</a>
+        </li>
+      </ul>
+      <span class="nav-item">
+        <a class="nav-link" href="/logout">ログアウト</a>
+      </span>
     </div>
+  </nav>
+  {% else %}
+  <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="top">tangoapp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02" style>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link disabled" href="/studying">勉強 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="/new">新規登録</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="/complete">学習済み</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="/allstudying">学習管理</a>
+        </li>
+      </ul>
+      <span class="nav-item">
+        <a class="nav-link" href="/signup">新規登録</a>
+      </span>
+      <span class="nav-item">
+        <a class="nav-link" href="/login">ログイン</a>
+      </span>
+    </div>
+  </nav>
+  {% endif %}
+  <div class="text-center">
+    {% block time %}
+
+    {% endblock %}
+  </div>
 </body>
 
 </html>
