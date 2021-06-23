@@ -1,37 +1,42 @@
 {% extends "layout.html" %}
 {% block time %}
-
-<h2>{{study.front}}</h2>
+<h1>{{study.front}}</h1>
 <h3>{{study.back}}</h3>
-<h3>品詞：{{study.partofspeech}}</h3>
-<h3>メモ：{{study.memo}}</h3>
-<h3>{{study.sumcount}}回学習しました</h3>
-<h3>次回学習日：{{study.date.strftime('%b %d, %Y')}}</h3>
-<h3><button id="word" value="{{study.front}}" onclick="pronounce()">発音を確認</button></h3>
-
+<button class="btn btn-primary"  style="margin-bottom: 20px;" id="word" value="{{study.front}}"
+        onclick="pronounce()">発音を確認</button>
 <script type="text/javascript">
-
     'use strict'
-
     function pronounce() {
-
         let word = document.getElementById('word').value;
         let u = new SpeechSynthesisUtterance();
         u.lang = 'en-US';
         u.text = word;
         speechSynthesis.speak(u);
-
     }
-
 </script>
-<form action="/repeats/{{study.id}}" method="post" name="repeats">
-    <input type="submit" name="repeats" value="やり直す">
-</form>
-<form action="/delete/{{study.id}}" method="post" name="delete">
-    <input type="submit" name="delete" value="削除する">
-</form>
-
-<h3><a class="edit" href="/edit/{{study.id}}">編集する</a></h3>
-<h4><a class="return" href="javascript:history.back()">戻る</a></h4>
-
+<br>
+<h4>品詞：{{study.partofspeech}}</h4>
+<h4>メモ：{{study.memo}}</h4>
+<br>
+<h5>{{study.sumcount}}回学習しました</h5>
+<small class="text-muted">次回学習日：{{study.date.strftime('%b %d, %Y')}}</small>
+<table style="margin-left: auto; margin-right: auto; margin-top: 20px;">
+    <tr>
+        <td>
+            <form action="/repeats/{{study.id}}" method="post" name="repeats">
+                <input class="btn btn-primary" type="submit" name="repeats" value="やり直す">
+            </form>
+        </td>
+        <td>
+            <form action="/delete/{{study.id}}" method="post" name="delete">
+                <input class="btn btn-primary" type="submit" name="delete" value="削除する">
+            </form>
+        </td>
+        <td>
+            <a class="btn btn-primary" id="edit" href="/edit/{{study.id}}">編集する</a>
+        </td>
+    </tr>
+</table>
+<br>
+<a class="return" href="javascript:history.back()">戻る</a>
 {% endblock %}

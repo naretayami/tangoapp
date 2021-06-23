@@ -196,7 +196,7 @@ def update(id):
     content.back = request.form["back"]
     content.memo = request.form["memo"]
     db_session.commit()
-    return redirect(url_for("studying"))
+    return redirect(url_for("index"))
 
 
 @app.route("/pronounce/<int:id>/")
