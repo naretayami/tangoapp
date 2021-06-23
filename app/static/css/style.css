@@ -69,11 +69,6 @@ input.form-control {
     margin: 30px;
 }
 
-.btn btn-primary {
-    position: relative;
-    left: 50%;
-}
-
 /* PC用のCSSはメディアクエリの外に記述する */
 
 @media screen and (max-width: 959px) {

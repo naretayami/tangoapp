@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block time %}
 
-<h1>tangoapp</h1>
+<h1>{{ name }}'s tangoapp</h1>
 
 <h4>検索</h4>
 
@@ -15,24 +15,19 @@
 <form class="w-25 mx-auto" action="/zensearch" method="post">
     <label class="sr-only"></label>
     <input class="form-control" type="text" name="search_word" placeholder="全一致検索" />
-
+    <br>
     <input class="btn btn-outline-primary my-1" type="submit" value="検索" />
 </form>
 
 <div class="searchresult">
     {% for searchone in searchALL %}
-    {{searchone.front}} ：{{searchone.back}}
-    品詞：{{searchone.partofspeech}}
+    <br>
+    <h5>{{searchone.front}} ：{{searchone.back}}</h5>
     <a class="pronounce" href="/pronounce/{{searchone.id}}">詳しく見る</a>
-
-    <form action="/repeats/{{searchone.id}}" method="post" name="repeats">
-        <input type="submit" name="repeats" value="×">
-    </form>
+    <br>
     {% endfor %}
 
     {{searchresult}}
 </div>
-
-<h2>{{ name }}</h2>
 
 {% endblock %}
