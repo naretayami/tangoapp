@@ -13,8 +13,9 @@ class List(Base):
     sumcount = Column(Integer)
     count = Column(Integer)
     date = Column(DateTime, default=datetime.today())
+    filename = Column(Text)
 
-    def __init__(self, userid=None, front=None, back=None, partofspeech=None, memo=None, sumcount=None, count=None, date=None):
+    def __init__(self, userid=None, front=None, back=None, partofspeech=None, memo=None, sumcount=None, count=None, date=None, filename=None, album_id=None):
         self.userid = userid
         self.front = front
         self.back = back
@@ -23,9 +24,13 @@ class List(Base):
         self.sumcount = sumcount
         self.count = count
         self.date = date
+        self.filename = filename
+      
         
     def __repr__(self):
        return '<front %r>' % (self.front)
+
+
 
 class User(Base):
     __tablename__ = 'users'

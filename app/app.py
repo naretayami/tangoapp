@@ -1,3 +1,4 @@
+import os,re
 from flask import Flask,render_template,request,session,redirect,url_for
 from models.models import List, User
 from models.database import db_session
@@ -13,6 +14,16 @@ app.secret_key = key.SECRET_KEY
 
 
 nlp = spacy.load("en_core_web_sm")
+
+# パスの指定 --- (*1)
+BASE_DIR = os.path.dirname(__file__)
+DATA_FILE = BASE_DIR + '/data/photos.sqlite3'
+FILES_DIR = BASE_DIR + '/files'
+
+# 画像ファイルの保存パスを返す --- (*2)
+def get_path(id, ptype = ''):
+	return FILES_DIR + '/' + str(id) + ptype + '.jpg' 
+
 
 
 @app.route("/")
@@ -141,7 +152,12 @@ def add():
         memo = request.form["memo"]
         sumcount = 0
         count = 0
-        content = List(userid,front,back,partofspeech,memo,sumcount,count,datetime.today())
+        upfile = request.files.get('upfile', None)
+        if not re.search(r'\.(jpg|jpeg)$', upfile.filename):
+            print('JPEGではない:', upfile.filename)
+            return 0
+        filename = upfile.filename
+        content = List(userid,front,back,partofspeech,memo,sumcount,count,datetime.today(),filename)
         db_session.add(content)
         db_session.commit()
         return redirect(url_for("index"))
@@ -153,10 +169,7 @@ def studying():
         name = session["user_name"]
         studyALL = List.query.filter_by(userid=name).order_by(List.date.asc())
         nowdate = datetime.today()
-        meg = "もうちょっとこうだったら使いやすいのに、を集めた英単語アプリです。"
-        meg2 = "主な機能を紹介します。"
-        meg3 = "１・反復学習"
-        return render_template("studying.html",studyALL=studyALL,nowdate=nowdate,meg=meg,meg2=meg2,meg3=meg3)
+        return render_template("studying.html",studyALL=studyALL,nowdate=nowdate)
     else:
         return redirect(url_for("top",status="logout"))
 
