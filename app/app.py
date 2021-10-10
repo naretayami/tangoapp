@@ -152,12 +152,13 @@ def add():
         memo = request.form["memo"]
         sumcount = 0
         count = 0
-        upfile = request.files.get('upfile', None)
-        if not re.search(r'\.(jpg|jpeg)$', upfile.filename):
-            print('JPEGではない:', upfile.filename)
-            return 0
-        filename = upfile.filename
-        content = List(userid,front,back,partofspeech,memo,sumcount,count,datetime.today(),filename)
+        # upfile = request.files.get('upfile', None)
+        # if not re.search(r'\.(jpg|jpeg)$', upfile.filename):
+        #     print('JPEGではない:', upfile.filename)
+        #     return 0
+        # filename = upfile.filename
+        # content = List(userid,front,back,partofspeech,memo,sumcount,count,datetime.today(),filename)
+        content = List(userid,front,back,partofspeech,memo,sumcount,count,datetime.today())
         db_session.add(content)
         db_session.commit()
         return redirect(url_for("index"))
